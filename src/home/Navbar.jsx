@@ -1,14 +1,23 @@
+import { useContext } from "react";
 import {  NavLink } from "react-router-dom";
+import { AuthContext } from "../usersetup/AuthProvider";
 
 
 
 const Navbar = () => {
+  const {user,logOut}=useContext(AuthContext);
+  const handleLogOut=()=>{
+    logOut()
+    .then()
+    .catch()
+  }
+
   const navlinks= <>
   <li><a href=""><NavLink to='/'>Home</NavLink></a></li>
   <li><a href=""><NavLink to='/meals'>Meals</NavLink></a></li>
   <li><a href=""><NavLink to='/Upcomingmeals'>Upcoming meals</NavLink></a></li>
-  <li><a href=""><NavLink to='/Upcomingmeals'>Notification</NavLink></a></li>
-  <li><a href=""><NavLink to='/login'>Login</NavLink></a></li>
+  <li><a href=""><NavLink to='/notification'>Notification</NavLink></a></li>
+ 
   
  </>
 
@@ -35,8 +44,18 @@ const Navbar = () => {
          }
         </ul>
       </div>
-      <div className="navbar-end">
-        <a className="btn">join us</a>
+      <div className="navbar-end mr-20">
+      {
+    user?
+    <div className="dropdown">
+    <div tabIndex={0} role="button" className="btn m-1"><img className="h-[50px] w-[50px] rounded-full" src={user.photoURL} alt="" /></div>
+    <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 text-center">
+      <li>{user.displayName}</li>
+      <li><a><NavLink to='/dashboard'>Dashboard</NavLink></a></li>
+      <button onClick={handleLogOut} className="btn btn-sm">LogOut</button>
+    </ul>
+  </div>:  <li><a href=""><NavLink to='/login'>Join us</NavLink></a></li>
+  }
       </div>
     </div>
     );

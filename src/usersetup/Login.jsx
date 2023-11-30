@@ -1,18 +1,79 @@
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import Navbar from '../home/Navbar';
+import { useContext } from 'react';
+import { AuthContext } from './AuthProvider';
+import Swal from 'sweetalert2';
+import useAxios from '../useHooks/useAxios';
 
 
 const Login = () => {
+  const {signIn,googleSignIn}=useContext(AuthContext);
+    const navigate=useNavigate();
+    const location=useLocation();
+    const from=location.state?.from?.pathname || '/';
+    console.log('state in the location',location.state);
+    
+    const axios=useAxios();
+    
+    const handleGoogle=()=>{
+        googleSignIn()
+        .then(result=>{
+            console.log(result.user);
+            navigate('/')
+            const userInfo={
+                email:result.user?.email,
+                name:result.user?.displayName
+            }
+            axios.post('/user',userInfo)
+            .then(res=>{
+                console.log(res.data);
+              navigate('/')
+            })
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+    }
    
     const handleLogin=e=>{
-        e.preventDefault();
-    }
+      e.preventDefault();
+      const form=e.target;
+      const email=form.email.value;
+      const password=form.password.value;
+      console.log(email,password);
+      signIn(email,password)
+      .then(res=>{
+          console.log(res.user);
+          Swal.fire({
+            title: "user login successfully",
+            showClass: {
+              popup: `
+                animate__animated
+                animate__fadeInUp
+                animate__faster
+              `
+            },
+            hideClass: {
+              popup: `
+                animate__animated
+                animate__fadeOutDown
+                animate__faster
+              `
+            }
+          });
+          navigate(from,{replace:true})
+      })
+      .catch(err=>{
+          console.log(err);
+      })
+
+  }
    
     return (
        <div>
-        <Navbar></Navbar>
+       
          <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex lg:flex-col md:flex-row-reverse">
           <div className="text-center lg:text-left md:w-1/2">
@@ -44,7 +105,7 @@ const Login = () => {
             </form>
             <p className='mx-auto'><small>NEW HERE? <Link className='text-purple-600 font-bold' to='/signup'>Create an account </Link></small></p>
             <div className="divider text-center"></div>
-            <div className='btn bg-purple-400'><FaGoogle className='text-black-400'></FaGoogle> GOOGLE SIGN IN</div>
+            <div onClick={handleGoogle} className='btn bg-purple-400'><FaGoogle className='text-black-400'></FaGoogle> GOOGLE SIGN IN</div>
             
           </div>
         </div>

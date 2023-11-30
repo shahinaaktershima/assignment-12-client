@@ -1,11 +1,16 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../home/Navbar";
+import { useContext } from "react";
+import { AuthContext } from "./AuthProvider";
+import useAxios from "../useHooks/useAxios";
+import Swal from "sweetalert2";
 
 
 const SignUp = () => {
-    // const navigate=useNavigate();
-    // const axiosPublic=useAxios();
+    const navigate=useNavigate();
+    const {signUp,updateUserProfile}=useContext(AuthContext);
+    const axiosPublic=useAxios();
     const {
         register,
         handleSubmit,
@@ -15,46 +20,50 @@ const SignUp = () => {
       } = useForm();
       
       const onSubmit = (data) => {console.log(data)
-    //  signUp(data.email,data.password)
-    //  .then(res=>{
-    //     console.log(res.user);
-    //     updateUserProfile(data.name,data.photoUrl)
-    //     .then(()=>{
-    //       // create user entry in the database
-    //       const userInfo={
-    //         name:data.name,
-    //         email:data.email
-    //       }
-    // //       axiosPublic.post('/users',userInfo)
-    // //       .then(res=>{
-    // //         if(res.data.insertedId){
-    // //           reset();
-    // //           Swal.fire({
-    // //               position: "top-end",
-    // //               icon: "success",
-    // //               title: "user created successfully",
-    // //               showConfirmButton: false,
-    // //               timer: 1500
-    // //             });
-    // //             navigate('/')
-    // //         }
-    // //       })
-    // //         console.log('user profile info updated');
+     signUp(data.email,data.password)
+     .then(res=>{
+        console.log(res.user);
+        updateUserProfile(data.name,data.photoUrl)
+        .then(()=>{
+          // create user entry in the database
+          const userInfo={
+            name:data.name,
+            email:data.email
+          } 
+      
+          axiosPublic.post('/user',userInfo)
+          .then(res=>{
+            if(res.data.insertedId){
+              reset();
+              Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "user created successfully",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+                navigate('/')
+            }
+          })
+            console.log('user profile info updated');
            
-    // //     })
-    // //     .catch(err=>{
-    // //         console.log(err);
-    // //     })
-    // //  })
-    //  .catch(err=>{
-    //     console.log(err);
-    //  })
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+     
+    
+     .catch(err=>{
+        console.log(err);
+     })
     
     }
     
+      )}
+    
     return (
        <div>
-        <Navbar></Navbar>
+       
          <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex lg:flex-col md:flex-row-reverse">
           <div className="text-center lg:text-left md:w-1/2">
