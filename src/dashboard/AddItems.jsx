@@ -4,8 +4,8 @@ import useAxiosSecure from "../useHooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
 import { FaUtensils } from "react-icons/fa";
 
-const image_hosting_key=import.meta.env.VITE_IMAGE_HOSTING_KEY;
-const image_hosting_api=`https://api.imgbb.com/1/upload?key=${image_hosting_key}`
+// const image_hosting_key=import.meta.env.VITE_IMAGE_HOSTING_KEY;
+// const image_hosting_api=`https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 const AddItems = () => {
    
  
@@ -14,15 +14,15 @@ const AddItems = () => {
       const { register, handleSubmit ,reset } = useForm();
       const onSubmit =async (data) => {console.log(data)
       // image upload to image bb and then get an url
-      const imageFile={image:data.image[0]};
+      // const imageFile={image:data.image[0]};
       
-      const res=await axiosSecure.post(image_hosting_api,imageFile,{
-        headers:{
-          'Content-Type':'multipart/form-data'
-        }
-      })
-      console.log(res.data);
-      if(res.data.success){
+      // const res=await axiosSecure.post(image_hosting_api,imageFile,{
+      //   headers:{
+      //     'Content-Type':'multipart/form-data'
+      //   }
+      // })
+      // console.log(res.data);
+      // if(res.data.success){
      
         // now send the menu item to the server with the image url
         const menuItem={
@@ -30,7 +30,7 @@ const AddItems = () => {
           category:data.category,
           price:parseFloat(data.price),
           recipe:data.recipe,
-          image:data.display_url,
+          image:data.image,
         }
         const menuRes=await axiosSecure.post('/addmeal',menuItem )
         console.log(menuRes.data);
@@ -45,7 +45,7 @@ const AddItems = () => {
             timer: 1500
           });
         }
-      }
+      // }
      
      
   
@@ -104,9 +104,10 @@ const AddItems = () => {
  
 </div>
 <div>
-<input 
+{/* <input 
   {...register("image")}
-type="file" className="file-input file-input-bordered w-full max-w-xs my-4" />
+type="file" className="file-input file-input-bordered w-full max-w-xs my-4" /> */}
+<input {...register("image")} className="file-input file-input-bordered w-full max-w-xs my-4" type="text"  alt="" />
 </div>
     
       
