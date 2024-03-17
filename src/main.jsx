@@ -36,12 +36,12 @@ const router = createBrowserRouter([
     {
       path:'/details/:id',
       element:<Details></Details>,
-      loader:({params})=>fetch(`https://final-project-xi-eight.vercel.app/meals/${params.id}`)
+      loader:({params})=>fetch(`https://final-project-new.vercel.app/meals/${params.id}`)
     },
     {
 path:'/detail/:id',
 element:<Detail></Detail>,
-loader:({params})=>fetch(`https://final-project-xi-eight.vercel.app/addmeal/${params.id}`)
+loader:({params})=>fetch(`https://final-project-new.vercel.app/addmeal/${params.id}`)
     },
     {
       path:'/meals',
