@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "../home/Navbar";
 import { useContext } from "react";
 import { AuthContext } from "./AuthProvider";
 import useAxios from "../useHooks/useAxios";
@@ -28,10 +27,11 @@ const SignUp = () => {
           // create user entry in the database
           const userInfo={
             name:data.name,
-            email:data.email
+            email:data.email,
+            photoUrl:data.photoUrl
           } 
       
-          axiosPublic.post('/user',userInfo)
+          axiosPublic.post('/users',userInfo)
           .then(res=>{
             if(res.data.insertedId){
               reset();
@@ -45,7 +45,7 @@ const SignUp = () => {
                 navigate('/')
             }
           })
-            console.log('user profile info updated');
+            console.log('users profile info updated');
            
         })
         .catch(err=>{
@@ -97,13 +97,13 @@ const SignUp = () => {
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input type="password" {...register("password",{ required: true ,maxLength: 20,minLength:6 ,pattern: /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9!#$%&?]{8,20}$/})} name="password" placeholder="password" className="input input-bordered"  />
+                <input type="password" {...register("password",{ required: true ,maxLength: 20,minLength:6 })} name="password" placeholder="password" className="input input-bordered"  />
                 { errors.password?.type === "required" && 
         <p className="text-red-400">password must be 6 characters</p>
                 }
-                { errors.password?.type === "pattern" && 
+                {/* { errors.password?.type === "pattern" && 
         <p className="text-red-400">password must be uppercase lowercase and one spacial character </p>
-                }
+                } */}
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                 </label>

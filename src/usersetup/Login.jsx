@@ -1,7 +1,6 @@
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
-import Navbar from '../home/Navbar';
 import { useContext } from 'react';
 import { AuthContext } from './AuthProvider';
 import Swal from 'sweetalert2';
@@ -26,7 +25,7 @@ const Login = () => {
                 email:result.user?.email,
                 name:result.user?.displayName
             }
-            axios.post('/user',userInfo)
+            axios.post('/users',userInfo)
             .then(res=>{
                 console.log(res.data);
               navigate('/')

@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import Meal from "./Meal";
+import useAxios from "../useHooks/useAxios";
 // import useMenu from "../useHooks/useMenu";
 
 
 const Meals = () => {
     const [meals,setMeals]=useState([]);
+    const axios=useAxios();
     useEffect(()=>{
-     fetch('http://localhost:5000/meals')
-     .then(res=>res.json())
-     .then(data=>setMeals(data))
+     axios.get('/meals')
+     .then(res=>setMeals(res.data))
     },[])
     const breakfast=meals.filter(item=>item.type==='breakfast')
     const lunch=meals.filter(item=>item.category==='lunch')

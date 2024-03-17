@@ -1,19 +1,28 @@
 import Swal from "sweetalert2";
-import useAxios from "../useHooks/useAxios";
+// import useAxios from "../useHooks/useAxios";
 import useAxiosSecure from "../useHooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
 import { FaUtensils } from "react-icons/fa";
 
-
+const image_hosting_key=import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api=`https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 const AddItems = () => {
    
-    
-    const axiosPublic= useAxios();
+ 
+    // const axiosPublic= useAxios();
     const axiosSecure=useAxiosSecure()
       const { register, handleSubmit ,reset } = useForm();
       const onSubmit =async (data) => {console.log(data)
       // image upload to image bb and then get an url
-   
+      const imageFile={image:data.image[0]};
+      
+      const res=await axiosSecure.post(image_hosting_api,imageFile,{
+        headers:{
+          'Content-Type':'multipart/form-data'
+        }
+      })
+      console.log(res.data);
+      if(res.data.success){
      
         // now send the menu item to the server with the image url
         const menuItem={
@@ -40,7 +49,7 @@ const AddItems = () => {
      
      
   
-      
+    }
       
     return (
         <div className="mx-10 my-10">

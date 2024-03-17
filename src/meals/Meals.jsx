@@ -1,21 +1,23 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import Meal from "../home/Meal";
+import useAxios from "../useHooks/useAxios";
 
 
 const Meals = () => {
+    const axios=useAxios();
     const [meals,setMeals]=useState([]);
+    // const [newMeal,setNewMeal]=useState('');
     useEffect(()=>{
-     fetch('http://localhost:5000/meals')
-     .then(res=>res.json())
-     .then(data=>setMeals(data))
+     axios.get('/meals')
+     .then(res=>setMeals(res.data))
     },[])
-    const breakfast=meals.filter(item=>item.type==='breakfast')
+    const breakfast=meals.filter(item=>item.category==='breakfast')
     const lunch=meals.filter(item=>item.category==='lunch')
     const dinner=meals.filter(item=>item.category==='dinner')
     const handleSubmit=(e)=>{
         e.preventDefault();
-        const name=e.target.text.value;
+        const name=e.target.text.value.toLowerCase();
         if(name==='breakfast'){
             setMeals(breakfast);
         }

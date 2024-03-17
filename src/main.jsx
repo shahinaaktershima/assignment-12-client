@@ -16,9 +16,12 @@ import Details from './home/Details.jsx';
 import Error from './home/Error.jsx';
 import Meals from './meals/Meals.jsx';
 
-import Users from './dashboard/Users.jsx';
+
 import AddItems from './dashboard/AddItems.jsx';
 import UpComingMeals from './dashboard/UpComingMeals.jsx';
+import Detail from './dashboard/Detail.jsx';
+import ManageItems from './dashboard/ManageItems.jsx';
+import AllUsers from './dashboard/AllUsers.jsx';
 
 
 const router = createBrowserRouter([
@@ -31,10 +34,14 @@ const router = createBrowserRouter([
       element:<Home></Home>
     },
     {
-
       path:'/details/:id',
       element:<Details></Details>,
       loader:({params})=>fetch(`http://localhost:5000/meals/${params.id}`)
+    },
+    {
+path:'/detail/:id',
+element:<Detail></Detail>,
+loader:({params})=>fetch(`http://localhost:5000/addmeal/${params.id}`)
     },
     {
       path:'/meals',
@@ -59,15 +66,20 @@ const router = createBrowserRouter([
   {
     path:'/dashboard',
     element:<Dashboard></Dashboard>,
-    children:[{
+    children:[  
+      {
+        path:'/dashboard',
+        element:<AddItems></AddItems>
+      },
+      {
       path:'/dashboard/users',
-      element:<Users></Users>
+      element:<AllUsers></AllUsers>
     },
+    
     {
-      path:'/dashboard/addmeals',
-      element:<AddItems></AddItems>
+      path:'/dashboard/manageItems',
+      element:<ManageItems></ManageItems>
     }
-  
   ]
   },
   

@@ -1,17 +1,18 @@
-import { Link, useLoaderData } from "react-router-dom";
 import { FcLike } from "react-icons/fc";
+import { Link, useLoaderData } from "react-router-dom";
 
 
-const Details = () => {
+const Detail = () => {
     const data=useLoaderData();
-    const {type,price,image,description}=data;
+    
+    const {image,price,recipe,category}=data;
     return (
         <div className="card card-compact  bg-base-100 shadow-xl my-10">
   <figure><img className="w-1/3 mx-auto h-[400px] rounded-lg" src={image} alt="Shoes" /></figure>
   <div className="card-body">
-    <h2 className="card-title">Title:{type}</h2>
+    <h2 className="card-title">Title:{category}</h2>
     <p className="font-bold">Price:{price}</p>
-    <p className="font-bold">Description:{description}</p>
+    <p className="font-bold">Description:{recipe}</p>
     <p className="font-bold">Rating</p>
     <button><FcLike></FcLike></button>
    
@@ -21,7 +22,7 @@ const Details = () => {
     </div>
   </div>
 </div>
-    );
+)
 };
 
-export default Details;
+export default Detail;

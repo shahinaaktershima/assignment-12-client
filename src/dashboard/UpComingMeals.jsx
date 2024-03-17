@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import UpcomingMeal from "./UpcomingMeal";
+import useAxios from "../useHooks/useAxios";
 
 
 const UpComingMeals = () => {
     const [meals,setMeals]=useState([]);
+    const axios=useAxios()
     useEffect(()=>{
-        fetch('http://localhost:5000/addmeal')
-        .then(res=>res.json())
-        .then(data=>setMeals(data))
+        axios('/addmeal')
+        .then(res=>setMeals(res.data))
     },[])
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 my-10 gap-10">
