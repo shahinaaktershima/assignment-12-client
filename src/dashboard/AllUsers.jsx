@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAxios from "../useHooks/useAxios";
 import { MdDelete } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa";
@@ -8,8 +8,10 @@ import Swal from "sweetalert2";
 const AllUsers = () => {
     const [users,setUsers]=useState([]);
     const axios=useAxios()
+   useEffect(()=>{
     axios.get('/users')
     .then(res=>setUsers(res.data))
+   },[])
 
     const handleDeleteUser=user=>{
             Swal.fire({
