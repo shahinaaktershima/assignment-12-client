@@ -6,9 +6,9 @@ import { NavLink, Outlet } from "react-router-dom";
 const Dashboard = () => {
  
     return (
-        <div className="flex">
-            <div className="w-64 min-h-screen bg-purple-400">
-                <ul className="menu p-4">
+        <div className="flex flex-col md:flex-row">
+            <div className="md:w-64 w-full md:min-h-screen bg-purple-400">
+                <ul className="menu p-4 flex md:flex-col flex-row">
                
                    
                 <li ><NavLink to='/dashboard' > <FaUtensilSpoon></FaUtensilSpoon>  Add items</NavLink></li>

@@ -81,8 +81,8 @@ const ManageItems = () => {
          <h2 className="text-4xl font-bold text-orange-400">All Items</h2>
          <h2 className="text-4xl font-bold text-orange-400">Total Meals:{allMeals.length+newMeal.length}</h2>
         </div>
-        <div className="overflow-x-auto w-full">
-<table className="table">
+        <div className="overflow-x-auto w-full mx-auto my-10">
+<table className="table overflow-x-auto">
  {/* head */}
  <thead>
    <tr >

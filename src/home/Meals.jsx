@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import { Tab, TabList,  Tabs } from "react-tabs";
 import Meal from "./Meal";
 import useAxios from "../useHooks/useAxios";
 // import useMenu from "../useHooks/useMenu";
@@ -7,48 +7,56 @@ import useAxios from "../useHooks/useAxios";
 
 const Meals = () => {
     const [meals,setMeals]=useState([]);
+    const [dispaly,setDisplay]=useState([])
     const axios=useAxios();
     useEffect(()=>{
      axios.get('/meals')
-     .then(res=>setMeals(res.data))
+     .then(res=>{setMeals(res.data)
+    setDisplay(res.data)
+    })
     },[])
-    const breakfast=meals.filter(item=>item.type==='breakfast')
-    const lunch=meals.filter(item=>item.category==='lunch')
-    const dinner=meals.filter(item=>item.category==='dinner')
-    
+    // const breakfast=meals.filter(item=>item.type==='breakfast')
+    // const lunch=meals.filter(item=>item.category==='lunch')
+    // const dinner=meals.filter(item=>item.category==='dinner')
+    // const [displayJobs,setDisplay]=useState([])
+    // useEffect(()=>{
+    //      fetch('https://job-project-server.vercel.app/jobs')
+    //      .then(res=>res.json())
+    //      .then(data=>{
+    //         setJobs(data);
+    //         setDisplay(data)
+    //      })
+    // },[])
+    const handleJobs=(meal)=>{
+       if(!meal){
+        setDisplay([...meals])
+        return 
+       }
+            const filteredMeal=meals.filter(item=>item.type===meal)
+            setDisplay(filteredMeal)
+        }
     return (
-        <div className="my-10">
-           
-            <Tabs>
-    <TabList className={'flex w-full justify-around gap-2 my-3'}>
-      <Tab className={'bg-purple-400 btn flex-1'}>All meals</Tab>
-      <Tab className={'bg-purple-400 btn flex-1'}>Breakfast</Tab>
-      <Tab className={'bg-purple-400 btn flex-1'}>Lunch</Tab>
-      <Tab className={'bg-purple-400 btn flex-1'}>dinner</Tab>
-    </TabList>
+        <div className="my-6">
+            
+            <Tabs className='space-y-3'>
+        <TabList className='grid grid-cols-4   gap-5'>
+          <Tab className='btn' onClick={()=>handleJobs()}>All meals</Tab>
+          <Tab className='btn' onClick={() => handleJobs("breakfast")}>Breakfast</Tab>
+          <Tab className='btn' onClick={() => handleJobs("lunch")}>Lunch</Tab>
+          <Tab className='btn' onClick={() => handleJobs("dinner")}>Dinner</Tab>
+         
+          </TabList>
+          {/* <TabPanel > */}
+       
+       <div className='grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-5'>
+        
+       {
+           dispaly.map(item=><Meal key={item._id} item={item}></Meal>)
+       }
 
-    <TabPanel className={'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'}>
-     {
-        meals.map(item=><Meal key={item._id} item={item}></Meal>)
-     }
-    </TabPanel>
-    <TabPanel className={'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'}>
-     {
-        breakfast.map(item=><Meal key={item._id} item={item}></Meal>)
-     }
-    </TabPanel>
-    <TabPanel  className={'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'}>
-    {
-        lunch.map(item=><Meal key={item._id} item={item}></Meal>)
-     }
-    </TabPanel>
-    <TabPanel  className={'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'}>
-    {
-        dinner.map(item=><Meal key={item._id} item={item}></Meal>)
-     }
-    </TabPanel>
-  </Tabs>
-        </div>
+        </div> 
+    </Tabs>
+    </div>
     );
 };
 

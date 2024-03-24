@@ -13,16 +13,6 @@ const AddItems = () => {
     const axiosSecure=useAxiosSecure()
       const { register, handleSubmit ,reset } = useForm();
       const onSubmit =async (data) => {console.log(data)
-      // image upload to image bb and then get an url
-      // const imageFile={image:data.image[0]};
-      
-      // const res=await axiosSecure.post(image_hosting_api,imageFile,{
-      //   headers:{
-      //     'Content-Type':'multipart/form-data'
-      //   }
-      // })
-      // console.log(res.data);
-      // if(res.data.success){
      
         // now send the menu item to the server with the image url
         const menuItem={
@@ -107,9 +97,14 @@ const AddItems = () => {
 {/* <input 
   {...register("image")}
 type="file" className="file-input file-input-bordered w-full max-w-xs my-4" /> */}
-<input {...register("image")} className="file-input file-input-bordered w-full max-w-xs my-4" type="text"  alt="" />
+<div className="form-control">
+  <label className="label">
+    <span className="label-text">PhotoUrl</span>
+   
+  </label>
+<input {...register("image")} placeholder="photourl" className="file-input file-input-bordered w-full p-2 max-w-xs my-4" type="text"  alt="" />
 </div>
-    
+    </div>
       
      <button className="btn ml-4">Add meals <FaUtensils></FaUtensils></button>
     </form> 
