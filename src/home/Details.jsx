@@ -7,7 +7,7 @@ const Details = () => {
     const {type,price,image,description}=data;
     return (
         <div className="card card-compact  bg-base-100 shadow-xl my-10">
-  <figure><img className="w-1/3 mx-auto h-[400px] rounded-lg" src={image} alt="Shoes" /></figure>
+  <figure><img className="md:w-1/3 w-full mx-auto h-[400px] rounded-lg" src={image} alt="Shoes" /></figure>
   <div className="card-body">
     <h2 className="card-title">Title:{type}</h2>
     <p className="font-bold">Price:{price}</p>

@@ -43,7 +43,7 @@ axios.get('/addmeal')
 
 
     return (
-      <div className="navbar bg-purple-400">
+      <div className="navbar bg-blue-500">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -55,7 +55,7 @@ axios.get('/addmeal')
            }
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">Hostel management</a>
+        <a className="btn btn-ghost md:text-xl text-sm">Hostel management</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 flex items-center">
@@ -68,7 +68,7 @@ axios.get('/addmeal')
       {
     user?
     <div className="dropdown">
-    <div tabIndex={0} role="button" className="m-1 lg:mr-12">
+    <div tabIndex={0} role="button" className="m-1 mr-12 ">
       {
         user?.photoURL?<img className="h-[50px] w-[50px] rounded-full" src={user?.photoURL} alt="" />: <div className="avatar">
         <div className="w-12">
@@ -82,7 +82,7 @@ axios.get('/addmeal')
       <li><a><NavLink to='/dashboard'>Dashboard</NavLink></a></li>
       <button onClick={handleLogOut} className="btn btn-sm">LogOut</button>
     </ul>
-  </div>:  <li><a href=""><NavLink to='/login'>Join us</NavLink></a></li>
+  </div>:  <li><NavLink className='btn bg-blue-800'  to='/login'>Join us</NavLink></li>
   }
       </div>
     </div>
