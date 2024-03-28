@@ -82,7 +82,7 @@ axios.get('/addmeal')
       <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
       <button onClick={handleLogOut} className="">LogOut</button>
     </ul>
-  </div>:  <li><NavLink className='btn bg-blue-800'  to='/login'>Join us</NavLink></li>
+  </div>:  <NavLink className='btn bg-blue-800 border-0'  to='/login'>Join us</NavLink>
   }
       </div>
     </div>
