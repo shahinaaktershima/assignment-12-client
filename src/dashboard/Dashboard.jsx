@@ -15,7 +15,7 @@ const Dashboard = () => {
                     <li ><NavLink to='/dashboard/manageItems' ><FaList></FaList> Manage Items</NavLink></li>
                    
                     
-                    <li ><NavLink to='/dashboard/users' ><FaUsers></FaUsers>All Users</NavLink></li>
+                    {/* <li ><NavLink to='/dashboard/users' ><FaUsers></FaUsers>All Users</NavLink></li> */}
                     
                   
                       <div className="divider"></div>
