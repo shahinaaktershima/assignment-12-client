@@ -64,23 +64,23 @@ axios.get('/addmeal')
          }
         </ul>
       </div>
-      <div className="navbar-end mr-20">
+      <div className="navbar-end md:mr-20">
       {
     user?
     <div className="dropdown">
-    <div tabIndex={0} role="button" className="m-1 mr-12 ">
+    <div tabIndex={0} role="button" className="m-1 md:mr-12 mr-6 ">
       {
-        user?.photoURL?<img className="h-[50px] w-[50px] rounded-full" src={user?.photoURL} alt="" />: <div className="avatar">
-        <div className="w-12">
+        user?.photoURL?<img className="md:h-[50px] md:w-[50px] h-[20px] w-[20px] rounded-full" src={user?.photoURL} alt="" />: <div className="avatar">
+        <div className="md:h-[50px] md:w-[50px] h-[20px] w-[20px] rounded-full">
           <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
         </div>
       </div>
       }
       </div>
-    <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 text-center">
+    <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box md:w-52 w-20 text-center">
       <li>{user?.displayName}</li>
-      <li><a><NavLink to='/dashboard'>Dashboard</NavLink></a></li>
-      <button onClick={handleLogOut} className="btn btn-sm">LogOut</button>
+      <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+      <button onClick={handleLogOut} className="btn btn-xs">LogOut</button>
     </ul>
   </div>:  <li><NavLink className='btn bg-blue-800'  to='/login'>Join us</NavLink></li>
   }
