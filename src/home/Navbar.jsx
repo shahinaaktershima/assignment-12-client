@@ -64,14 +64,14 @@ axios.get('/addmeal')
          }
         </ul>
       </div>
-      <div className="navbar-end md:mr-20">
+      <div className="navbar-end mr-10 md:mr-20">
       {
     user?
     <div className="dropdown">
     <div tabIndex={0} role="button" className="m-1 md:mr-12 mr-6 ">
       {
         user?.photoURL?<img className="md:h-[50px] md:w-[50px] h-[20px] w-[20px] rounded-full" src={user?.photoURL} alt="" />: <div className="avatar">
-        <div className="md:h-[50px] md:w-[50px] h-[20px] w-[20px] rounded-full">
+        <div className="md:h-[50px] md:w-[50px] h-[25px] w-[25px] rounded-full">
           <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
         </div>
       </div>
