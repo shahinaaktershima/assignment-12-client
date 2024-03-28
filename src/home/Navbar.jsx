@@ -15,7 +15,7 @@ const Navbar = () => {
     .catch()
   }
 useEffect(()=>{
-axios('/addmeal')
+axios.get('/addmeal')
 .then(res=>setupcomming(res.data))
 
 },[])
