@@ -64,7 +64,7 @@ axios.get('/addmeal')
          }
         </ul>
       </div>
-      <div className="navbar-end mr-10 md:mr-20">
+      <div className="navbar-end mr-14 md:mr-20">
       {
     user?
     <div className="dropdown">
@@ -77,7 +77,7 @@ axios.get('/addmeal')
       </div>
       }
       </div>
-    <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box md:w-52 w-20 text-center">
+    <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box md:w-52 w-24 text-center">
       <li>{user?.displayName}</li>
       <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
       <button onClick={handleLogOut} className="btn btn-xs">LogOut</button>
