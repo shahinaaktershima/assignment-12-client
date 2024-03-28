@@ -77,10 +77,10 @@ axios.get('/addmeal')
       </div>
       }
       </div>
-    <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box md:w-52 w-[104px] text-center">
+    <ul className="dropdown-content z-[1] menu md:p-2 shadow bg-base-100 rounded-box md:w-52 w-[104px] text-center">
       <li>{user?.displayName}</li>
       <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
-      <button onClick={handleLogOut} className="btn btn-xs">LogOut</button>
+      <button onClick={handleLogOut} className="">LogOut</button>
     </ul>
   </div>:  <li><NavLink className='btn bg-blue-800'  to='/login'>Join us</NavLink></li>
   }
